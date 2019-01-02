@@ -65,6 +65,7 @@ class EmailResultsCommand extends Command
         $struct = mailparse_msg_get_structure($mimemail);
         $info = mailparse_msg_get_part_data($mimemail);
         $data = rtrim($info['headers']['subject']);
+        $data = imap_utf8($data);
         $fromEmail = $info['headers']['from'];
         $dataBody = mailparse_msg_extract_part($mimemail, $rawEmail, null);
         Log::info($fromEmail.";".$data);
