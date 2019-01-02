@@ -89,20 +89,23 @@ class EmailResultsCommand extends Command
             $event = new Event;
             $data = [];
             $data['name'] = $body;
+            $data['file'] = "";
             $data['created_at'] = now();
             $data['updated_at'] = now();
             $event->insert($data);
         }
         else
         {
-            Log::debug($fromEmail.";Info;".$header[0]);
+            $event = new Event;
+            $lastEventID = $event->max('id');
+            // Log::debug($fromEmail.";Info;".$header[0]);
             $result = new Result;
             // Count
-            $rowCount = $result->all()->where('rgid',$header[0])->count();
+            $rowCount = $result->all()->where('rgid',$header[0])->where('event_id',$lastEventID)->count();
             if ($rowCount > 0)
             {
                 // Update
-                $result_update = $result->where('rgid',$header[0])->first();
+                $result_update = $result->where('rgid',$header[0])->where('event_id',$lastEventID)->first();
                 $result_update->apparatus = $header[1];
                 $result_update->startno = $header[2];
                 $result_update->name = $header[3];
@@ -112,10 +115,9 @@ class EmailResultsCommand extends Command
             else
             {
                 // Insert
-                $event = new Event;
                 $data = [];
                 $data['rgid'] = $header[0];
-                $data['event_id'] = $event->max('id');
+                $data['event_id'] = $lastEventID;
                 $data['apparatus'] = $header[1];
                 $data['startno'] = $header[2];
                 $data['name'] =  $header[3];
