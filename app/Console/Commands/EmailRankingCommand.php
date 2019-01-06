@@ -57,23 +57,26 @@ class EmailRankingCommand extends Command
         fclose($fd);
         mailparse_msg_parse($mimemail,$rawEmail);
         $mime_part = mailparse_msg_get_structure($mimemail);
-        //Log::info($mime_part);
+        // Log::info($mime_part);
         foreach ( $mime_part as $part )
         {
             $filename = "";
             if (preg_match('/^(\d).([2-9])/', $part))
             {
-                //Log::info($part);
+                // Log::info($part);
                 $body_part = mailparse_msg_get_part($mimemail, $part);
                 $info = mailparse_msg_get_part_data($body_part);
                 // Log::info($info);
-                $filename = $info['disposition-filename'];
-                if (preg_match('/(Rangliste-)(\d*)(.pdf)/', $filename))
+                if (isset($info['content-name']))
                 {
-                    $dataBody = mailparse_msg_extract_part($body_part, $rawEmail, null);
-                    Storage::put('public/'.$filename, $dataBody);
-                    $this->UpdateEvent($filename);
-                    Log::info("Upload File: ". $filename);
+                    $filename = $info['content-name'];
+                    if (preg_match('/(Rangliste-)(\d*)(.pdf)/',  $filename))
+                    {
+                        $dataBody = mailparse_msg_extract_part($body_part, $rawEmail, null);
+                        Storage::put('public/'.$filename, $dataBody);
+                        $this->UpdateEvent($filename);
+                        Log::info("Upload File: ". $filename);
+                    }
                 }
             }
         }
