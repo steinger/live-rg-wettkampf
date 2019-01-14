@@ -39,6 +39,6 @@ class EventsController extends Controller
     {
       $event = $this->event->find($request->event_id);
       $data = [];
-      return view('/list')->with('event', $event->name)->with('event_id', $request->event_id);
+      return view('/contents/list')->with('event', $event->name)->with('event_id', $request->event_id);
     }
 }

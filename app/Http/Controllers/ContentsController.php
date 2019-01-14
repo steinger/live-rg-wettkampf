@@ -25,13 +25,13 @@ class ContentsController extends Controller
     {
       $event = $this->event->all()->max();
       // dd($event);
-      if ($event == null) { return view('/homeoff')->with('event', "")->with('event_id', 0); }
+      if ($event == null) { return view('/contents/homeoff')->with('event', "")->with('event_id', 0); }
       if (strtotime("now -3 day") < strtotime($event->created_at) )
       {
-        return view('/home')->with('event', $event->name)->with('event_id', $event->id);
+        return view('/contents/home')->with('event', $event->name)->with('event_id', $event->id);
       }
       else {
-        return view('/homeoff')->with('event', "")->with('event_id', $event->id);
+        return view('/contents/homeoff')->with('event', "")->with('event_id', $event->id);
       }
     }
 
@@ -59,7 +59,7 @@ class ContentsController extends Controller
       $data = [];
       $data  = $this->result->getList($request->event_id);
       // dd($data);
-      return view('/list')->with(array('results' => $data))->with('event', $event->name)->with('event_id', $request->event_id);
+      return view('/contents/list')->with(array('results' => $data))->with('event', $event->name)->with('event_id', $request->event_id);
     }
 
     /**
@@ -88,6 +88,6 @@ class ContentsController extends Controller
       $data  = $this->result->getGymnasts($request->event_id,$request->startno);
       $dataName = $this->result->getGymnastsName($request->event_id,$request->startno);
       // dd($data);
-      return view('/gymnasts')->with(array('results' => $data))->with(array('names' => $dataName))->with('event', $event->name)->with('event_id', $request->event_id);
+      return view('/contents/gymnasts')->with(array('results' => $data))->with(array('names' => $dataName))->with('event', $event->name)->with('event_id', $request->event_id);
     }
 }

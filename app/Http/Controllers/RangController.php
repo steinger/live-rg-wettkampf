@@ -32,7 +32,7 @@ class RangController extends Controller
         return view('/rang/index')->with(array('categories' => $data))->with('event', $event->name)->with('event_id', $event->id);
       }
       else {
-        return view('/homeoff')->with('event', "")->with('event_id', $event->id);
+        return view('/contents/homeoff')->with('event', "")->with('event_id', $event->id);
       }
     }
 
