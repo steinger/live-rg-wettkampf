@@ -14,8 +14,8 @@
               <img class="mr-3" :src="item.imageUrl" alt="RG image" width="80">
             </div>
             <div class="media-body">
-              <h4>{{ item.startno }} {{ item.name }}</h4>
-              <strong>{{ item.total }}</strong><br />{{ item.body }}
+              <h4>{{ item.startno }} {{ item.name }} &middot; {{ item.category }}</h4>
+              <strong>{{item.apparatus}} &middot; {{ item.f_score }}</strong><br />D:{{ item.d_score }} E:{{ item.e_score }} {{ item.penalty}}
               <div class="float-sm-right"><i class="far fa-clock"></i>
                 <small>{{ item.updated_at_humans }}</small>
                 <a v-bind:href="'/gymnasts/'+ item.event_id + '/' + item.startno" class="text-dark"><i class="fas fa-chevron-down"></i></a>

@@ -29,13 +29,14 @@ class Result extends Model
     public function getResults_api($event_id,$page)
     {
         $data = DB::table('results as r')
-                          ->select('r.id', 'r.apparatus', 'r.startno', 'r.name', 'r.body', 'r.updated_at','r.event_id' )
+                          ->select('r.id', 'r.event_id', 'r.apparatus_short', 'r.startno', 'r.name', 'r.category',
+                           'r.apparatus', 'r.f_score', 'r.d_score', 'r.e_score', 'r.penalty', 'r.updated_at')
                           ->whereRaw("r.event_id LIKE $event_id")
                           ->offset(0)
                           ->limit($page)
                           ->orderBy('r.updated_at','desc')
                           ->get();
-        return ($this->parse($data));
+        return ($this->webPreparation($data));
     }
 
     /**
