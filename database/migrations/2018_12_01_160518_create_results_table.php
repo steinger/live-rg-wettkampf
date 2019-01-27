@@ -18,10 +18,16 @@ class CreateResultsTable extends Migration
             $table->integer('event_id')->nullable()->unsigned(); // foreign
             $table->foreign('event_id')->references('id')->on('events');
             $table->string('rgid',6);
-            $table->string('apparatus',20);
+            $table->string('apparatus_short',2);
             $table->integer('startno');
             $table->string('name');
-            $table->string('body');
+            $table->string('category',3);
+            $table->string('competition_type',2);
+            $table->string('apparatus',20);
+            $table->float('f_score',5,3);
+            $table->string('d_score',5);
+            $table->string('e_score',5);
+            $table->string('penalty',20);
             $table->timestamps();
         });
     }
