@@ -91,30 +91,24 @@ class Result extends Model
     }
 
     /**
-     * Parse DB data for Web
-     * @param  array $data  all data
-     * @return array        all data parsed
+     * webPreparation added an change fields for web
+     * @param  array $data all data
+     * @return array       all data
      */
-    public function parse($data)
+    public function webPreparation($data)
     {
       $apparatuses = new Apparatus();
       foreach ($data as $key => $value) {
-        if (array_key_exists($value->apparatus, $apparatuses->all()))
+        if (array_key_exists($value->apparatus_short, $apparatuses->all()))
         {
-            $value->apparatus = $apparatuses->get($value->apparatus);
-            $value->imageUrl = "images/".$value->apparatus.".png";
+            $value->apparatus_short = $apparatuses->get($value->apparatus_short);
+            $value->imageUrl = "images/".$value->apparatus_short.".png";
         }
         else {
-          $value->apparatus = 0;
+          $value->apparatus_short = 0;
           $value->imageUrl = "images/apple-icon.png";
         }
-        $newBody = array_pad(explode(",", $value->body), 4, '');
-        $out = '';
-        if ($newBody[1] != '') $out .= ltrim($newBody[1]);
-        if ($newBody[2] != '') $out .= $newBody[2];
-        if ($newBody[3] != '') $out .= $newBody[3];
-        $value->body = $out;
-        $value->total = $newBody[0];
+        $value->f_score = number_format($value->f_score, 3, '.', '');
         $value->updated_at_humans = Carbon::createFromFormat('Y-m-d H:i:s', $value->updated_at)->diffForHumans();
       }
       // dd($data);
