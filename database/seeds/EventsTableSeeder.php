@@ -15,6 +15,7 @@ class EventsTableSeeder extends Seeder
         [
             'name' => 'Berner Kantonalmeisterschaft - Championnat cantonal bernois, '. date("d. F Y"),
             'file' => '',
+            'ranking' => 1,
             'created_at' => date("Y-m-d H:i:s")
         ]
       );
