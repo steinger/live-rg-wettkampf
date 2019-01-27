@@ -13,7 +13,7 @@
       </div>
       <div class="list-group">
         <a v-for="item in filteredItems" v-bind:href="'/gymnasts/'+ item.event_id + '/' + item.startno" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-          {{ item.startno }} - {{ item.name }}
+          {{ item.startno }} - {{ item.name }} &middot; {{ item.category}}
           <span class="badge badge-primary badge-pill">{{ item.count }}</span>
         </a>
       </div>

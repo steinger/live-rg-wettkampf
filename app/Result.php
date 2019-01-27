@@ -46,7 +46,7 @@ class Result extends Model
     public function getList($event_id)
     {
       $data = DB::table('results as r')
-                        ->select('r.startno', 'r.name', 'r.event_id',
+                        ->select('r.startno', 'r.name', 'r.category', 'r.event_id',
                         DB::raw("(SELECT count(*) FROM results r2
                                 WHERE r2.startno = r.startno and r2.event_id LIKE $event_id) AS count"))
                         ->distinct()
