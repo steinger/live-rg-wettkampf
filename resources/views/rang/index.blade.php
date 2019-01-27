@@ -9,7 +9,7 @@
 
   <div class="list-group">
     @foreach( $categories as $cat )
-    <a href="{{ route('rang_list', ['cat_id'=> $cat]) }}" class="list-group-item list-group-item-action">{{$cat}}</a>
+    <a href="{{ route('rang_list', ['cat_id'=> $cat->category]) }}" class="list-group-item list-group-item-action">{{$cat->category}}</a>
     @endforeach
   </div>
 
