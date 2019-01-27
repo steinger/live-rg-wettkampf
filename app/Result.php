@@ -65,12 +65,13 @@ class Result extends Model
     public function getGymnasts($event_id, $startno)
     {
       $data = DB::table('results as r')
-                        ->select('r.apparatus', 'r.body', 'r.updated_at')
+                        ->select('r.apparatus_short', 'r.name', 'r.category', 'r.apparatus',
+                          'r.f_score', 'r.d_score', 'r.e_score', 'r.penalty', 'r.updated_at')
                         ->whereRaw("r.event_id LIKE $event_id")
                         ->whereRaw("r.startno = $startno")
                         ->orderBy('r.updated_at','desc')
                         ->get();
-      return ($this->parse($data));
+      return ($this->webPreparation($data));
     }
 
     /**
@@ -82,7 +83,7 @@ class Result extends Model
     public function getGymnastsName($event_id, $startno)
     {
       $data = DB::table('results as r')
-                        ->select('r.startno', 'r.name')
+                        ->select('r.startno', 'r.name','r.category')
                         ->distinct()
                         ->whereRaw("r.event_id LIKE $event_id")
                         ->whereRaw("r.startno = $startno")
