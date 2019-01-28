@@ -19,19 +19,15 @@
     <tbody>
       @php
         $i = 1;
-        $noteTemp = 0;
       @endphp
       @foreach( $gymnasts as $gymnast )
-        @php $noteTemp == $gymnast['note'] ? $rang = $rangTemp : $rang = $i @endphp
         <tr>
-          <th scope="row">{{ $rang }}</th>
-          <td>{{ $gymnast['startnr'] }}</td>
-          <td>{{ $gymnast['name'] }}</td>
-          <td>{{ number_format($gymnast['note'],3) }}</td>
+          <th scope="row">{{ $i }}</th>
+          <td>{{ $gymnast->startno }}</td>
+          <td>{{ $gymnast->name }}</td>
+          <td>{{ number_format($gymnast->total,3) }}</td>
         </tr>
         @php
-          $noteTemp = $gymnast['note'];
-          $rangTemp = $rang;
           $i++;
         @endphp
       @endforeach

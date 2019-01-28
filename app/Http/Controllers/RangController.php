@@ -46,8 +46,7 @@ class RangController extends Controller
     {
       $event = $this->event->all()->max();
       $data = [];
-      $data = $this->rang->getData($event->id);
-      $data = $this->rang->getRangKat($data,$request->cat_id);
+      $data = $this->rang->getRangKat($request->cat_id,$event->id);
       // dd($data);
       return view('/rang/list')->with(array('gymnasts' => $data))->with('event', $event->name)->with('event_id', $request->event_id);
     }
