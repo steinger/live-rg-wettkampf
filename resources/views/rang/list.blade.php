@@ -7,6 +7,10 @@
 
 <div class="container">
 
+  <div class="alert alert-info">
+    <h4 class="alert-heading">{{__('Rangliste')}} &middot; {{$title}}</h4>
+  </div>
+
   <table class="table">
     <thead>
       <tr>

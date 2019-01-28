@@ -48,6 +48,6 @@ class RangController extends Controller
       $data = [];
       $data = $this->rang->getRangKat($request->cat_id,$event->id);
       // dd($data);
-      return view('/rang/list')->with(array('gymnasts' => $data))->with('event', $event->name)->with('event_id', $request->event_id);
+      return view('/rang/list')->with(array('gymnasts' => $data))->with('event', $event->name)->with('event_id', $event->id)->with('title',$request->cat_id);
     }
 }
