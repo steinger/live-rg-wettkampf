@@ -24,7 +24,11 @@
       @foreach( $gymnasts as $gymnast )
       @php $totalTemp == $gymnast->total ? $rang = $rangTemp : $rang = $i @endphp
         <tr>
-          <th scope="row">{{ $i }}</th>
+          <th scope="row">{{ $rang }}
+          @if($rang <= 3)
+            <i class="fas fa-medal"></i>
+          @endif
+          </th>
           <td>{{ $gymnast->startno }}</td>
           <td>{{ $gymnast->name }}</td>
           <td>{{ number_format($gymnast->total,3) }}</td>
