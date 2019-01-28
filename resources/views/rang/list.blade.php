@@ -19,8 +19,10 @@
     <tbody>
       @php
         $i = 1;
+        $totalTemp = 0;
       @endphp
       @foreach( $gymnasts as $gymnast )
+      @php $totalTemp == $gymnast->total ? $rang = $rangTemp : $rang = $i @endphp
         <tr>
           <th scope="row">{{ $i }}</th>
           <td>{{ $gymnast->startno }}</td>
@@ -28,6 +30,8 @@
           <td>{{ number_format($gymnast->total,3) }}</td>
         </tr>
         @php
+          $totalTemp = $gymnast->total;
+          $rangTemp = $rang;
           $i++;
         @endphp
       @endforeach
