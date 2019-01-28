@@ -8,16 +8,16 @@
 <div class="container">
 
   <div class="alert alert-info">
-    <h4 class="alert-heading">{{__('Rangliste')}} &middot; {{$title}}</h4>
+    <h4 class="alert-heading">{{__('Ranking')}} &middot; {{$title}}</h4>
   </div>
 
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">Rang</th>
-        <th scope="col">Startnr</th>
-        <th scope="col">Name</th>
-        <th scope="col">Total</th>
+        <th scope="col">{{__('Rank')}}</th>
+        <th scope="col">{{__('Startno')}}</th>
+        <th scope="col">{{__('Name')}}</th>
+        <th scope="col">{{__('Total')}}</th>
       </tr>
     </thead>
     <tbody>
