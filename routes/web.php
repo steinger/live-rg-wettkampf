@@ -13,7 +13,7 @@
 Route::get('/', 'ContentsController@home_api')->name('home');
 Route::get('/list/{event_id}', 'ContentsController@list')->name('list');
 Route::get('/gymnasts/{event_id}/{startno}', 'ContentsController@gymnasts')->name('gymnasts');
-Route::get('/events/{event_id}', 'EventsController@index')->name('events');
+Route::get('/events', 'EventsController@index')->name('events');
 Route::get('/event/list/{event_id}', 'EventsController@list')->name('event_list');
 
 Route::get('/rang', 'RangController@index')->name('rang');

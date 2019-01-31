@@ -23,7 +23,7 @@
               <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                   <a class="nav-item nav-link" href="{{ route('list', ['event_id' => $event_id]) }}">{{__('Liste')}}</a>
-                  <a class="nav-item nav-link" href="{{ route('events', ['event_id' => $event_id]) }}">{{__('Events')}}</a>
+                  <a class="nav-item nav-link" href="{{ route('events') }}">{{__('Events')}}</a>
                 </div>
               </div>
               @endif

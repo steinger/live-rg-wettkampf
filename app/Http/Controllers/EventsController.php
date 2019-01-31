@@ -22,12 +22,13 @@ class EventsController extends Controller
      * @param  Request $request Browser Requests
      * @return array           all data
      */
-    public function index(Request $request)
+    public function index()
     {
+      $event = $this->event->all()->max();
       $data = [];
       $data = $this->event->getData();
       // dd($data);
-      return view('/events/index')->with(array('events' => $data))->with('event_id', $request->event_id);
+      return view('/events/index')->with(array('events' => $data))->with('event_id', $event->id);
     }
 
     /**
