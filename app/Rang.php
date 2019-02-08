@@ -20,4 +20,14 @@ class Rang extends Model
                           ->get();
         return ($data);
     }
+
+    public function getLiveRanking($event_id)
+    {
+      $data = DB::table('events')
+                        ->where('ranking', 1)
+                        ->where('id', $event_id)
+                        ->count();
+      // dd($data);
+      return ($data);
+    }
 }

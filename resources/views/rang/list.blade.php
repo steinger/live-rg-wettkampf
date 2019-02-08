@@ -2,6 +2,7 @@
 
 @section('event', $event)
 @section('event_id', $event_id)
+@section('show_ranking', 1)
 
 @section('content')
 
@@ -10,7 +11,6 @@
   <div class="alert alert-info">
     <h4 class="alert-heading">{{__('Ranking')}} &middot; {{$title}}</h4>
   </div>
-
   <table class="table">
     <thead>
       <tr>
@@ -45,6 +45,7 @@
       @endforeach
     </tbody>
   </table>
+  Aktualisiert {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $last_update)->diffForHumans() }}
 </div>
 
 @endsection
