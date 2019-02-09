@@ -39,9 +39,9 @@
       <div class="fixed-bottom">
         <nav class="navbar navbar-dark bg-primary">
           <div class="container">
-            <p><strong>{{url('/')}}</strong> <i class="far fa-copyright"></i> <?php echo date('Y');?>
+            <small><strong>{{url('/')}}</strong> <i class="far fa-copyright"></i> <?php echo date('Y');?>
              ({{__('Results without guarantee')}})
-            </p>
+           </small>
           </div>
         </nav>
       </div>
