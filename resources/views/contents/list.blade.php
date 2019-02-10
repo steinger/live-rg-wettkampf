@@ -2,6 +2,7 @@
 
 @section('event', $event)
 @section('event_id', $event_id)
+@section('show_ranking', $show_ranking)
 
 @section('content')
 

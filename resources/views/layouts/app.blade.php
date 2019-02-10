@@ -23,6 +23,9 @@
               <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                   <a class="nav-item nav-link" href="{{ route('list', ['event_id' => $event_id]) }}">{{__('Liste')}}</a>
+                  @if ($show_ranking > 0)
+                    <a class="nav-item nav-link" href="{{ route('rang', ['event_id' => $event_id]) }}">{{__('Ranking')}}</a>
+                  @endif
                   <a class="nav-item nav-link" href="{{ route('events') }}">{{__('Events')}}</a>
                 </div>
               </div>
@@ -36,9 +39,9 @@
       <div class="fixed-bottom">
         <nav class="navbar navbar-dark bg-primary">
           <div class="container">
-            <p><strong>{{url('/')}}</strong> <i class="far fa-copyright"></i> <?php echo date('Y');?>
+            <small><strong>{{url('/')}}</strong> <i class="far fa-copyright"></i> <?php echo date('Y');?>
              ({{__('Results without guarantee')}})
-            </p>
+           </small>
           </div>
         </nav>
       </div>

@@ -24,16 +24,17 @@ class RangController extends Controller
      */
     public function index(Request $request)
     {
-      $event = $this->event->all()->max();
-      if (strtotime("now -1 week") < strtotime($event->created_at) )
+      $event = $this->event->find($request->event_id);
+      $liveRang = $this->rang->getLiveRanking($event->id);
+      if ($liveRang)
       {
         $data = [];
         $data['categories'] = $this->result->select('category')->distinct()->where('event_id', $event->id)->get()->sortby('category');
         // dd($data);
-        return view('/rang/index')->with($data)->with('event', $event->name)->with('event_id', $event->id);
+        return view('/rang/index')->with($data)->with('event', $event->name)->with('event_id', $event->id)->with('show_ranking', $liveRang);
       }
       else {
-        return view('/contents/homeoff')->with('event', "")->with('event_id', $event->id);
+        return view('/contents/homeoff')->with('event', "")->with('event_id', $event->id)->with('show_ranking', $liveRang);
       }
     }
 
@@ -44,10 +45,12 @@ class RangController extends Controller
      */
     public function list(Request $request)
     {
-      $event = $this->event->all()->max();
+      $event = $this->event->find($request->event_id);
+      $liveRang = $this->rang->getLiveRanking($event->id);
+      $last_update = $this->result->where('category', $request->cat_id)->max('updated_at');
       $data = [];
       $data = $this->rang->getRangKat($request->cat_id,$event->id);
       // dd($data);
-      return view('/rang/list')->with(array('gymnasts' => $data))->with('event', $event->name)->with('event_id', $event->id)->with('title',$request->cat_id);
+      return view('/rang/list')->with(array('gymnasts' => $data))->with('event', $event->name)->with('event_id', $event->id)->with('title',$request->cat_id)->with('show_ranking', $liveRang)->with('last_update', $last_update);
     }
 }
