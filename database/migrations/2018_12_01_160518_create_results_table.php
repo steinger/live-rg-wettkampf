@@ -25,8 +25,8 @@ class CreateResultsTable extends Migration
             $table->string('competition_type',2);
             $table->string('apparatus',20);
             $table->float('f_score',5,3);
-            $table->string('d_score',5);
-            $table->string('e_score',5);
+            $table->string('d_score',6);
+            $table->string('e_score',6);
             $table->string('penalty',20);
             $table->timestamps();
         });
