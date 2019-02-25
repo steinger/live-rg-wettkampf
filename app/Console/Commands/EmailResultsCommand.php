@@ -17,8 +17,8 @@ class EmailResultsCommand extends Command
      *  Subject : 00000
      *  Body : Name of Event
      * Input Results:
-     *  Subject : [rgid number] [abbr apparatus] [startno] [name of gymnast] [category]
-     *  Body : [apparatus] [Total score] [D points] [E points], optional [penalty]
+     *  Subject : [rgid number];[short of apparatus];[startno];[name of gymnast];[category];[type of competition]
+     *  Body : [apparatus];[Final score];[D points];[E points];[penalty optional] 
      * Send mail pipe to program with  |/[absolutpath]/artisan --env=local emailresults
      *
      * @var string
@@ -65,7 +65,7 @@ class EmailResultsCommand extends Command
         $struct = mailparse_msg_get_structure($mimemail);
         $info = mailparse_msg_get_part_data($mimemail);
         $data = rtrim($info['headers']['subject']);
-        $data = imap_utf8($data);
+        $data = iconv_mime_decode($data, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, "UTF-8");
         $fromEmail = $info['headers']['from'];
         $dataBody = mailparse_msg_extract_part($mimemail, $rawEmail, null);
         Log::info($fromEmail.";".$data);
@@ -81,7 +81,7 @@ class EmailResultsCommand extends Command
     public function InputData($emailData, $body, $fromEmail)
     {
         // Parse first part
-        $header = explode(" ", $emailData,4);
+        $header = explode(";", $emailData,6);
         $body = explode("---", $body,2);
         $body = str_replace("\r\n"," ",$body[0]);
         $body = substr($body, 0, 200);
@@ -92,29 +92,18 @@ class EmailResultsCommand extends Command
             $data = [];
             $data['name'] = $body;
             $data['file'] = "";
-            $data['ranking'] = 0;
+            $data['ranking'] = 1;
             $data['created_at'] = now();
             $data['updated_at'] = now();
             $event->insert($data);
         }
         else
         {
-            // Parse secound part
-            $headerNameArray = explode(" ", $header[3]);
-            $category = array_pop($headerNameArray);
-            $headerName = implode(" ", $headerNameArray);
-            $bodyArray = array_pad(explode(",", $body), 4, '');
-            $firstBodyArray = explode(" ", $bodyArray[0]);
-            $f_score = array_pop($firstBodyArray);
-            $apparatus = implode(" ", $firstBodyArray);
-            $d_scoreArray = explode(":", $bodyArray[1]);
-            $d_score = array_pop($d_scoreArray);
-            $e_scoreArray = explode(":", $bodyArray[2]);
-            $e_score = array_pop($e_scoreArray);
+            // Parse Body secound
+            $bodyArray = array_pad(explode(";", $body), 5, '');
             // Get last Event ID
             $event = new Event;
             $lastEventID = $event->max('id');
-            // Log::debug($fromEmail.";Info;".$header[0]);
             // Count
             $result = new Result;
             $rowCount = $result->all()->where('rgid',$header[0])->where('event_id',$lastEventID)->count();
@@ -124,13 +113,13 @@ class EmailResultsCommand extends Command
                 $result_update = $result->where('rgid',$header[0])->where('event_id',$lastEventID)->first();
                 $result_update->apparatus_short = $header[1];
                 $result_update->startno = $header[2];
-                $result_update->name = $headerName;
-                $result_update->category = $category;
-                $result_update->apparatus = $apparatus;
-                $result_update->f_score = $f_score;
-                $result_update->d_score = trim($d_score);
-                $result_update->e_score = trim($e_score);
-                $result_update->penalty = trim($bodyArray[3]);
+                $result_update->name = $header[3];
+                $result_update->category = $header[4];
+                $result_update->apparatus = $bodyArray[0];
+                $result_update->f_score = $bodyArray[1];
+                $result_update->d_score = $bodyArray[2];
+                $result_update->e_score = $bodyArray[3];
+                $result_update->penalty = trim($bodyArray[4]);
                 $result_update->save();
             }
             else
@@ -141,14 +130,14 @@ class EmailResultsCommand extends Command
                 $data['event_id'] = $lastEventID;
                 $data['apparatus_short'] = $header[1];
                 $data['startno'] = $header[2];
-                $data['name'] = $headerName;
-                $data['category'] = $category;
-                $data['competition_type'] = 'MK';
-                $data['apparatus'] = $apparatus;
-                $data['f_score'] = $f_score;
-                $data['d_score'] = trim($d_score);
-                $data['e_score'] = trim($e_score);
-                $data['penalty'] = trim($bodyArray[3]);
+                $data['name'] = $header[3];
+                $data['category'] = $header[4];
+                $data['competition_type'] = $header[5];
+                $data['apparatus'] = $bodyArray[0];
+                $data['f_score'] = $bodyArray[1];
+                $data['d_score'] = $bodyArray[2];
+                $data['e_score'] = $bodyArray[3];
+                $data['penalty'] = trim($bodyArray[4]);
                 $data['created_at'] = now();
                 $data['updated_at'] = now();
                 $result->insert($data);
