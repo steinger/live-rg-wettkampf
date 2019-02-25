@@ -52,7 +52,7 @@ export default {
       return this.items.filter(item =>  {
         var number = item.startno.toString()
         return item.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1
-        || number.indexOf(this.search) > -1
+        || number.indexOf(this.search) > -1 || item.category.toLowerCase().indexOf(this.search.toLowerCase()) > -1
       })
     },
     countItems () {
