@@ -25,7 +25,7 @@
           <h4>{{ $result->apparatus }}: {{ $result->f_score }}</h4>
           <strong>D:{{ $result->d_score }} E:{{ $result->e_score }} {{ $result->penalty}}</strong>
           <br />
-          <i class="far fa-clock"></i> {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $result->updated_at)->formatLocalized('%d.%m.%Y %H:%M')}} &middot; <small>{{ $result->updated_at_humans }}</small>
+          <i class="far fa-clock"></i> {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $result->updated_at)->isoFormat('lll')}} &middot; <small>{{ $result->updated_at_humans }}</small>
         </div>
       </div>
     </li>
