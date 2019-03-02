@@ -60,10 +60,8 @@ class ContentsController extends Controller
     {
       $event = $this->event->find($request->event_id);
       $liveRang = $this->rang->getLiveRanking($event->id);
-      $data = [];
-      $data  = $this->result->getList($request->event_id);
       // dd($data);
-      return view('/contents/list')->with(array('results' => $data))->with('event', $event->name)->with('event_id', $request->event_id)->with('show_ranking', $liveRang);
+      return view('/contents/list')->with('event', $event->name)->with('event_id', $request->event_id)->with('show_ranking', $liveRang);
     }
 
     /**
