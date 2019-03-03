@@ -9,10 +9,14 @@
 <div class="container">
 
   <div class="alert alert-info">
+
     <h4 class="alert-heading">{{__('Ranking')}} &middot; {{$title}}</h4>
   </div>
-  <table class="table">
-    <thead>
+  @if (strtotime("now -4 hour") < strtotime($last_update) )
+  <p class="text-center text-info">{{__('Updated')}} {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $last_update)->diffForHumans() }}</p>
+  @endif
+  <table class="table table-hover">
+    <thead class="thead-light">
       <tr>
         <th scope="col">{{__('Rank')}}</th>
         <th scope="col">{{__('Startno')}}</th>
@@ -45,7 +49,6 @@
       @endforeach
     </tbody>
   </table>
-  Aktualisiert {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $last_update)->diffForHumans() }}
 </div>
 
 @endsection
