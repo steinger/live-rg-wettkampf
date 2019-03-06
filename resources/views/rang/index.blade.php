@@ -8,7 +8,7 @@
 
 
   @if (count($categories))
-  <div class="container" style="margin-top: 15px;">
+  <div class="container mt-2">
   <div class="list-group">
     @foreach( $categories as $cat )
     <a href="{{ route('rang_list', ['event_id' => $event_id, 'cat_id'=> $cat->category]) }}" class="list-group-item list-group-item-action">{{$cat->category}}</a>

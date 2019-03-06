@@ -18,7 +18,7 @@ class RangController extends Controller
     }
 
     /**
-     * Index Webseite list Categries
+     * Index Webpage list Categries
      * @param  Request $request Browser Requests
      * @return array           all data
      */
@@ -29,7 +29,7 @@ class RangController extends Controller
       if ($liveRang)
       {
         $data = [];
-        $data['categories'] = $this->result->select('category')->distinct()->where('event_id', $event->id)->get()->sortby('category');
+        $data['categories'] = $this->result->select('category')->distinct()->where('event_id', $event->id)->where('competition_type','MK')->get()->sortby('category');
         // dd($data);
         return view('/rang/index')->with($data)->with('event', $event->name)->with('event_id', $event->id)->with('show_ranking', $liveRang);
       }
@@ -39,7 +39,7 @@ class RangController extends Controller
     }
 
     /**
-     * Ranking list
+     * Ranking list for MK
      * @param  Request $request Browser Requests
      * @return array           all data
      */
@@ -47,9 +47,9 @@ class RangController extends Controller
     {
       $event = $this->event->find($request->event_id);
       $liveRang = $this->rang->getLiveRanking($event->id);
-      $last_update = $this->result->where('category', $request->cat_id)->max('updated_at');
+      $last_update = $this->result->where('category', $request->cat_id)->where('competition_type',"MK")->max('updated_at');
       $data = [];
-      $data = $this->rang->getRangKat($request->cat_id,$event->id);
+      $data = $this->rang->getRangKat($event->id, $request->cat_id);
       // dd($data);
       return view('/rang/list')->with(array('gymnasts' => $data))->with('event', $event->name)->with('event_id', $event->id)->with('title',$request->cat_id)->with('show_ranking', $liveRang)->with('last_update', $last_update);
     }
