@@ -18,8 +18,8 @@ window.Vue = require('vue');
  */
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue'));
-Vue.component('live-results', require('./components/LiveResults.vue'));
-Vue.component('list-filter', require('./components/ListFilter.vue'));
+Vue.component('live-results', require('./components/LiveResults.vue').default);
+Vue.component('list-filter', require('./components/ListFilter.vue').default);
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))
