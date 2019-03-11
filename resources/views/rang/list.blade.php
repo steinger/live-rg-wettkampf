@@ -21,7 +21,7 @@
         <th scope="col">{{__('Rank')}}</th>
         <th scope="col">{{__('Startno')}}</th>
         <th scope="col">{{__('Name')}}</th>
-        <th scope="col">{{__('Total')}}</th>
+        <th scope="col">{{__('Score')}}</th>
       </tr>
     </thead>
     <tbody>
