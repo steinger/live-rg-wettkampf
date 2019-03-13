@@ -8,11 +8,11 @@
 
 <div class="container">
   <div class="jumbotron">
-    <h1 class="display-4">Liebe Besucher</h1>
-    <p class="lead">Zur Zeit findet kein Wettkampf statt.</p>
+    <h1 class="display-4">{{__('Dear visitors')}}</h1>
+    <p class="lead">{{__('There is currently no competition.')}}</p>
     <hr class="my-4">
-    <p>Wettkampf-Termine auf der Webseite des STV - FSG.</p>
-    <a class="btn btn-primary btn-lg" href="http://www.stv-fsg.ch/de/sportarten/rhythmische-gymnastik/wettkaempfe/" role="button">STV Wettkämpfe</a>
+    <p>{{__('Competition dates on the website of the STV - FSG.')}}</p>
+    <a class="btn btn-primary btn-lg" href="http://www.stv-fsg.ch/de/sportarten/rhythmische-gymnastik/wettkaempfe/" role="button">{{__('STV competitions')}}</a>
   </div>
 </div>
 
