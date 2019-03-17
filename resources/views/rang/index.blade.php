@@ -17,7 +17,7 @@
   @else
   <div class="container">
     <div class="list-group">
-      <button type="button" class="list-group-item list-group-item-info">Keine Daten vorhanden.</button>
+      <button type="button" class="list-group-item list-group-item-info">{{__('No data available.')}}</button>
     </div>
   @endif
 </div>
