@@ -7,7 +7,7 @@
 @section('content')
 
 <div id="app">
-  <live-results></live-results>
+  <live-results lang_start="{{__('Competition is started')}}" lang_text="{{__('There are no results available yet.')}}"></live-results>
 </div>
 
 @endsection

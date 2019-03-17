@@ -30,8 +30,8 @@
     </div>
     <div class="jumbotron jumbotron-fluid" v-else="countItems == 0" v-show="!loading">
       <div class="container-fluid">
-        <h1 class="display-4">Wettkampf ist gestartet</h1>
-        <p class="lead">Es stehen noch keine Resultate zur Verfügung.</p>
+        <h1 class="display-4">{{ StartLang }}</h1>
+        <p class="lead">{{ TextLang }}</p>
       </div>
     </div>
   </div>
@@ -44,6 +44,10 @@ export default {
   components: {
     // BaseInputText, TodoListItem
   },
+  props:{
+    lang_start: { required: true },
+    lang_text: { required: true },
+  },
   data() {
     return {
       page: 10,
@@ -53,6 +57,8 @@ export default {
       loadingbottom: false,
       items: [],
       countLoad: 0,
+      StartLang: this.lang_start,
+      TextLang: this.lang_text
     }
   },
   watch:{
