@@ -6,7 +6,7 @@
     <div v-if="countItems > 0">
 
       <div class="input-group my-2">
-        <input v-model="search" class="form-control py-2 border-right-0 border" type="text" placeholder="Search..">
+        <input v-model="search" class="form-control py-2 border-right-0 border" type="text" v-bind:placeholder="placeholderLang">
         <span class="input-group-append">
               <div class="input-group-text bg-transparent"><i class="fa fa-search"></i></div>
         </span>
@@ -20,7 +20,7 @@
     </div>
     <div v-else="countItems == 0" v-show="!loading">
       <div class="list-group">
-        <button type="button" class="list-group-item list-group-item-info">Keine Daten vorhanden.</button>
+        <button type="button" class="list-group-item list-group-item-info">{{ noDataLang }}</button>
       </div>
     </div>
   </div>
@@ -34,12 +34,16 @@ export default {
   },
   props:{
     event_id: { required: true },
+    lang_search: { required: true },
+    lang_nodata: { required: true },
   },
   data(){
     return {
       loading: true,
       items:[],
       search:'',
+      placeholderLang: this.lang_search,
+      noDataLang: this.lang_nodata
     }
   },
   mounted () {
