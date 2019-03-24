@@ -22,11 +22,11 @@
             </button>
               <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                  <a class="nav-item nav-link" href="{{ route('list', ['event_id' => $event_id]) }}">{{__('List')}}</a>
+                  <a class="nav-item nav-link active" href="{{ route('list', ['event_id' => $event_id]) }}">{{__('List')}}</a>
                   @if ($show_ranking > 0)
-                    <a class="nav-item nav-link" href="{{ route('rang', ['event_id' => $event_id]) }}">{{__('Ranking')}}</a>
+                    <a class="nav-item nav-link active" href="{{ route('rang', ['event_id' => $event_id]) }}">{{__('Ranking')}}</a>
                   @endif
-                  <a class="nav-item nav-link" href="{{ route('events') }}">{{__('Events')}}</a>
+                  <a class="nav-item nav-link active" href="{{ route('events') }}">{{__('Events')}}</a>
                 </div>
               </div>
               @endif
