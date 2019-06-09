@@ -16,7 +16,7 @@ class CreateEventsTable extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('file',50);
+            $table->string('file',50)->nullable();
             $table->integer('ranking');
             $table->timestamps();
         });

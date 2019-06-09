@@ -27,7 +27,7 @@ class CreateResultsTable extends Migration
             $table->float('f_score',5,3);
             $table->string('d_score',6);
             $table->string('e_score',6);
-            $table->string('penalty',20);
+            $table->string('penalty',20)->nullable();
             $table->timestamps();
         });
     }
