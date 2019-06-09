@@ -16,6 +16,6 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/', 'ContentsController@home_api');
-Route::get('/live/{page}', 'ContentsController@live_api');
-Route::get('/list/{event_id}', 'ContentsController@list_api');
+Route::get('/', 'ContentController@homeApi');
+Route::get('/live/{page}', 'ContentController@liveApi');
+Route::get('/list/{event_id}', 'ContentController@listApi');

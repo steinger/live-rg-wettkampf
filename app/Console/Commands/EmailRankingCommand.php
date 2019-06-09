@@ -74,7 +74,7 @@ class EmailRankingCommand extends Command
                     {
                         $dataBody = mailparse_msg_extract_part($body_part, $rawEmail, null);
                         Storage::put('public/'.$filename, $dataBody);
-                        $this->UpdateEvent($filename);
+                        $this->updateEvent($filename);
                         Log::info("Upload File: ". $filename);
                     }
                 }
@@ -83,10 +83,10 @@ class EmailRankingCommand extends Command
     }
 
     /**
-     * UpdateEvent update ranking on event db
+     * updateEvent update ranking on event db
      * @param string $file Name of attachment file
      */
-    public function UpdateEvent($file)
+    public function updateEvent($file)
     {
         $event = new Event;
         $last_id = $event->max('id');

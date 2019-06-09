@@ -9,7 +9,7 @@ use App\Event as Event;
 use App\Result as Result;
 use App\Rang as Rang;
 
-class EventsController extends Controller
+class EventController extends Controller
 {
     //
     public function __construct( Event $event, Result $result, Rang $rang )

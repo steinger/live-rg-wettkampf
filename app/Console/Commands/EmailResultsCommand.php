@@ -18,7 +18,7 @@ class EmailResultsCommand extends Command
      *  Body : Name of Event
      * Input Results:
      *  Subject : [rgid number];[short of apparatus];[startno];[name of gymnast];[category];[type of competition]
-     *  Body : [apparatus];[Final score];[D points];[E points];[penalty optional] 
+     *  Body : [apparatus];[Final score];[D points];[E points];[penalty optional]
      * Send mail pipe to program with  |/[absolutpath]/artisan --env=local emailresults
      *
      * @var string
@@ -69,7 +69,7 @@ class EmailResultsCommand extends Command
         $fromEmail = $info['headers']['from'];
         $dataBody = mailparse_msg_extract_part($mimemail, $rawEmail, null);
         Log::info($fromEmail.";".$data);
-        $this->InputData($data,$dataBody,$fromEmail);
+        $this->inputData($data,$dataBody,$fromEmail);
     }
 
     /**
@@ -78,7 +78,7 @@ class EmailResultsCommand extends Command
      * @param string $body      Email body data
      * @param string $fromEmail Email put from
      */
-    public function InputData($emailData, $body, $fromEmail)
+    public function inputData($emailData, $body, $fromEmail)
     {
         // Parse first part
         $header = explode(";", $emailData,6);

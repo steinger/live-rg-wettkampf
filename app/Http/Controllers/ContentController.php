@@ -9,7 +9,7 @@ use App\Event as Event;
 use App\Rang as Rang;
 
 
-class ContentsController extends Controller
+class ContentController extends Controller
 {
     //
     public function __construct( Result $result, Event $event, Rang $rang )
@@ -23,7 +23,7 @@ class ContentsController extends Controller
      * home_api Start for vue Page with get Data over API
      * @return  array  data for startpage
      */
-    public function home_api()
+    public function homeApi()
     {
       $event = $this->event->all()->max();
       // dd($event);
@@ -43,7 +43,7 @@ class ContentsController extends Controller
      * @param  int $page  Page
      * @return array      All data on Json
      */
-    public function live_api($page)
+    public function liveApi($page)
     {
      $event = $this->event->all()->max();
      $data = [];
@@ -69,7 +69,7 @@ class ContentsController extends Controller
      * @param  int $event_id  Event ID
      * @return array          All data on Json
      */
-    public function list_api($event_id)
+    public function listApi($event_id)
     {
       $event = $this->event->find($event_id);
       $data = [];
