@@ -19,3 +19,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/', 'ContentController@homeApi');
 Route::get('/live/{page}', 'ContentController@liveApi');
 Route::get('/list/{event_id}', 'ContentController@listApi');
+
+// WebService for Input data
+Route::post('/event','EventController@storeApi');
