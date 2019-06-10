@@ -9,6 +9,8 @@
         <link rel="apple-touch-icon-precomposed" href="{{ asset('images/apple-icon.png') }}" />
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <meta name="csrf-token" content="{{ csrf_token() }}" />
+        <meta name="keywords" content="RG,Rhythmische Gymnastik,Schweiz,Suisse" />
+        <meta name="description" content="RG Live Resultate der Rhythmische Gymnastik Schweiz" />
     </head>
     <body>
         <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary">
