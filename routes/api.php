@@ -22,3 +22,4 @@ Route::get('/list/{event_id}', 'ContentController@listApi');
 
 // WebService for Input data
 Route::post('/event','EventController@storeApi');
+Route::post('/result','ResultController@storeApi');
