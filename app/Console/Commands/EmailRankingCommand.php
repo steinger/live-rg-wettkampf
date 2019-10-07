@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use App\Event as Event;
+use ZBateson\MailMimeParser\MailMimeParser;
 
 class EmailRankingCommand extends Command
 {
@@ -40,46 +41,30 @@ class EmailRankingCommand extends Command
      * Execute the console command.
      *
      * @link https://www.sitepoint.com/piping-emails-laravel-application
-     * @link http://php.net/manual/de/ref.mailparse.php
+     * @link https://mail-mime-parser.org/
      *
      * @return mixed
      */
     public function handle()
     {
-        // read from stdin
-        $fd = fopen("php://stdin", "r");
-        $rawEmail = "";
-        while (!feof($fd)) {
-            $rawEmail .= fread($fd, 1024);
-        }
-        // Parse
-        $mimemail = mailparse_msg_create();
-        fclose($fd);
-        mailparse_msg_parse($mimemail,$rawEmail);
-        $mime_part = mailparse_msg_get_structure($mimemail);
-        // Log::info($mime_part);
-        foreach ( $mime_part as $part )
-        {
-            $filename = "";
-            if (preg_match('/^(\d).([2-9])/', $part))
-            {
-                // Log::info($part);
-                $body_part = mailparse_msg_get_part($mimemail, $part);
-                $info = mailparse_msg_get_part_data($body_part);
-                // Log::info($info);
-                if (isset($info['content-name']))
-                {
-                    $filename = $info['content-name'];
-                    if (preg_match('/(Rangliste-)(\d*)(.pdf)/',  $filename))
-                    {
-                        $dataBody = mailparse_msg_extract_part($body_part, $rawEmail, null);
-                        Storage::put('public/'.$filename, $dataBody);
-                        $this->updateEvent($filename);
-                        Log::info("Upload File: ". $filename);
-                    }
-                }
-            }
-        }
+      // read from stdin
+      $fd = fopen("php://stdin", "r");
+        $parser = new MailMimeParser();
+        $message = $parser->parse($fd);
+      fclose($fd);
+      $attachments = $message->getAllAttachmentParts();
+      foreach ($attachments as $part)
+      {
+         $fname = "";
+         if (preg_match('/(Rangliste-)(\d*)(.pdf)/',  $part->getFilename()))
+         {
+           $fname = $part->getFilename();
+           $stream = $part->getContentStream();
+           Storage::put('public/'.$fname, $stream);
+           $this->updateEvent($fname);
+           Log::info("Upload File: ". $fname);
+         }
+      }
     }
 
     /**
