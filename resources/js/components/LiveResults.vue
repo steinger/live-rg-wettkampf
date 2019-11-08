@@ -5,7 +5,7 @@
     </div>
     <div v-if="countItems > 0">
       <ul class="list-group">
-        <li class="list-group-item" v-for="item in items">
+        <li class="list-group-item" v-bind:class="{ 'rg_animate': item.color == 1 }" v-for="item in items">
           <div class="media">
             <div v-if="item.apparatus">
               <a v-bind:href="'/gymnasts/'+ item.event_id + '/' + item.startno"><img class="mr-3" :src="item.imageUrl" alt="RG image"></a>
@@ -107,6 +107,23 @@ export default {
     countItems () {
       return Object.keys(this.items).length
     },
-  },
+  }
 }
 </script>
+
+<style>
+.rg_animate {
+  -webkit-animation: colorchange 5s;
+  animation: colorchange 5s;
+}
+@-webkit-keyframes color-change {
+    0% { background: #e0a3a2; }
+    50% { background: #e0bfbf; }
+    100% { background: #f8fafc; }
+    }
+@keyframes colorchange {
+    0% { background: #e0a3a2; }
+    50% { background: #e0bfbf; }
+    100% { background: #f8fafc; }
+    }
+</style>

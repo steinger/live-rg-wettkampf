@@ -112,6 +112,11 @@ class Result extends Model
         }
         $value->f_score = number_format($value->f_score, 3, '.', '');
         $value->updated_at_humans = Carbon::createFromFormat('Y-m-d H:i:s', $value->updated_at)->diffForHumans();
+        if (Carbon::now()->subSecond(30)->lessThanOrEqualTo(Carbon::createFromFormat('Y-m-d H:i:s', $value->updated_at))) {
+          $value->color = 1;
+        } else {
+          $value->color = 0;
+        }
       }
       // dd($data);
       return $data;
