@@ -59,6 +59,7 @@ class ContentController extends Controller
     public function list(Request $request)
     {
       $event = $this->event->find($request->event_id);
+      if ($event == NULL) $event = $this->event->orderBy('id', 'desc')->first();
       $liveRang = $this->rang->getLiveRanking($event->id);
       // dd($data);
       return view('/contents/list')->with('event', $event->name)->with('event_id', $request->event_id)->with('show_ranking', $liveRang);
@@ -86,6 +87,7 @@ class ContentController extends Controller
     public function gymnasts(Request $request)
     {
       $event = $this->event->find($request->event_id);
+      if ($event == NULL) $event = $this->event->orderBy('id', 'desc')->first();
       $liveRang = $this->rang->getLiveRanking($event->id);
       $data = [];
       $data  = $this->result->getGymnasts($request->event_id,$request->startno);

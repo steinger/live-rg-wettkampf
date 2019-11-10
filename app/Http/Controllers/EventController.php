@@ -43,6 +43,7 @@ class EventController extends Controller
     public function list(Request $request)
     {
       $event = $this->event->find($request->event_id);
+      if ($event == NULL) $event = $this->event->orderBy('id', 'desc')->first();
       $liveRang = $this->rang->getLiveRanking($event->id);
       $data = [];
       return view('/contents/list')->with('event', $event->name)->with('event_id', $request->event_id)->with('show_ranking', $liveRang);
