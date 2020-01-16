@@ -59,7 +59,7 @@ class EmailRankingCommand extends Command
          if (preg_match('/(Rangliste-)(\d*)(.pdf)/',  $part->getFilename()))
          {
            $fname = $part->getFilename();
-           $stream = $part->getContentStream();
+           $stream = $part->getContent();
            Storage::put('public/'.$fname, $stream);
            $this->updateEvent($fname);
            Log::info("Upload File: ". $fname);
