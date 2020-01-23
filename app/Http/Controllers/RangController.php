@@ -24,8 +24,7 @@ class RangController extends Controller
      */
     public function index(Request $request)
     {
-      $event = $this->event->find($request->event_id);
-      if ($event == NULL) $event = $this->event->where('ranking',1)->orderBy('id', 'desc')->first();
+      $event = $this->event->findOrFail($request->event_id);
       $liveRang = $this->rang->getLiveRanking($event->id);
       if ($liveRang)
       {
@@ -47,8 +46,7 @@ class RangController extends Controller
      */
     public function list(Request $request)
     {
-      $event = $this->event->find($request->event_id);
-      if ($event == NULL) $event = $this->event->where('ranking',1)->orderBy('id', 'desc')->first();
+      $event = $this->event->findOrFail($request->event_id);
       $liveRang = $this->rang->getLiveRanking($event->id);
       $last_update = $this->result->where('category', $request->cat_id)->where('competition_type',"MK")->max('updated_at');
       $data = [];
@@ -64,7 +62,7 @@ class RangController extends Controller
      */
     public function gflist(Request $request)
     {
-      $event = $this->event->find($request->event_id);
+      $event = $this->event->findOrFail($request->event_id);
       $liveRang = $this->rang->getLiveRanking($event->id);
       $last_update = $this->result->where('category', $request->cat_id)->where('apparatus_short',$request->app_id)->where('competition_type',"GF")->max('updated_at');
       $data = [];

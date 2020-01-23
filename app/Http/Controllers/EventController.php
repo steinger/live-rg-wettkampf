@@ -27,6 +27,7 @@ class EventController extends Controller
      */
     public function index()
     {
+      $this->event->findOrFail(1);
       $event = $this->event->all()->max();
       $liveRang = $this->rang->getLiveRanking($event->id);
       $data = [];
@@ -42,8 +43,7 @@ class EventController extends Controller
      */
     public function list(Request $request)
     {
-      $event = $this->event->find($request->event_id);
-      if ($event == NULL) $event = $this->event->orderBy('id', 'desc')->first();
+      $event = $this->event->findOrFail($request->event_id);
       $liveRang = $this->rang->getLiveRanking($event->id);
       $data = [];
       return view('/contents/list')->with('event', $event->name)->with('event_id', $request->event_id)->with('show_ranking', $liveRang);
