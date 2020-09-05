@@ -12,7 +12,7 @@
     <p class="lead">{{__('There is currently no competition.')}}</p>
     <hr class="my-4">
     <p>{{__('Competition dates on the website of the STV - FSG.')}}</p>
-    <a class="btn btn-primary btn-lg" href="http://www.stv-fsg.ch/de/sportarten/rhythmische-gymnastik/wettkaempfe/" role="button">{{__('STV competitions')}}</a>
+    <a class="btn btn-primary btn-lg" href="{{ config('global.competitions_url') }}" role="button">{{__('STV competitions')}}</a>
   </div>
 </div>
 
