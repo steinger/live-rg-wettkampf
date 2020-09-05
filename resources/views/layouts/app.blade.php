@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-        <title>{{__('RG Live Results')}}</title>
+        <title>{{__(config('app.name'))}}</title>
         <!-- Fonts -->
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <link rel="apple-touch-icon-precomposed" href="{{ asset('images/apple-icon.png') }}" />
@@ -16,8 +16,7 @@
         <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary">
           <div class="container">
           <a class="navbar-brand" href="{{ route('home') }}"><img src="{{ asset('images/logo.png') }}" width="30" height="30" alt="">
-
-            {{__('RG Live Results')}}</a>
+            {{__(config('app.name'))}}</a>
             @if ($event_id > 0)
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
